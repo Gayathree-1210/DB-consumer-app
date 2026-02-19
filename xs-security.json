@@ -1,0 +1,24 @@
+
+{
+  "xsappname": "WebStoreConsumerApp",
+  "tenant-mode": "dedicated",
+  "oauth2-configuration": {
+    "redirect-uris": [
+      "https://9bd8f307trial-dev-webstoreconsumerapp-approuter.cfapps.us10-001.hana.ondemand.com/**"
+    ]
+  },
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.Read",
+      "description": "Read access"
+    }
+  ],
+  "role-templates": [
+    {
+      "name": "Viewer",
+      "scope-references": ["$XSAPPNAME.Read"]
+    }
+  ]
+}
+
+

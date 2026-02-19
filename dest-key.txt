@@ -1,0 +1,22 @@
+Getting key devkey for service instance WebStoreConsumerApp-destination as g.rajakaruna@sana-commerce.com...
+
+{
+  "credentials": {
+    "clientid": "sb-clonee66a73904c1b49668bf37215df89451a!b586523|destination-xsappname!b62",
+    "clientsecret": "ba1d0d8f-99c9-4c3b-9a4e-f6aecebae7ae$8G_3j9kWWBxIceZFjLwjSreRlUaRv_2Se6Nj55NzmS8=",
+    "credential-type": "binding-secret",
+    "identityzone": "9bd8f307trial",
+    "instanceid": "e66a7390-4c1b-4966-8bf3-7215df89451a",
+    "tenantid": "787946ae-ef78-4514-bda6-39b117f67409",
+    "tenantmode": "dedicated",
+    "token-type": [
+      "xsuaa"
+    ],
+    "uaadomain": "authentication.us10.hana.ondemand.com",
+    "uri": "https://destination-configuration.cfapps.us10.hana.ondemand.com",
+    "url": "https://9bd8f307trial.authentication.us10.hana.ondemand.com",
+    "verificationkey": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsCPwRXVtZk0L6jMENbc3\nNoqZWCSQGq0rABS7x6JGFvZvGld8NCjkK/fX9a8Xi/yKYK8rlGpJsg8qwSui3YQW\n0vQDyfELquugjf/SjElSy6123CCEvuJG2/ApGqzNecLrwHriIYSy7CNGhrMV+VPy\newxWYEew72hPuq5AN9qOGFwHIKtmHYlf+XSh8I6PY8/RjoJwO0LfsmR/5T0pqbOB\nT+3NturNmLql6WWhh2Iklr03zzWox9ALUxwQVa3jgBzvaOU8nmhwablIg0336qj8\nv/T5PwUgjdeIjknCLkb+ebZmxkIs9+kgt7jeb+kzfTm/txLEqxcNX+ubAg9hEUfG\nIwIDAQAB\n-----END PUBLIC KEY-----",
+    "xsappname": "clonee66a73904c1b49668bf37215df89451a!b586523|destination-xsappname!b62"
+  }
+}
+

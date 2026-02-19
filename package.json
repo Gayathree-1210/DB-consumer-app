@@ -1,0 +1,65 @@
+{
+  "name": "WebStoreConsumerApp",
+  "version": "1.0.0",
+  "description": "Consumes WebStoreApp OData service",
+  "private": true,
+  "engines": {
+    "node": "20.x",
+    "npm": "9.x"
+  },
+  "dependencies": {
+    "@sap/cds": "^9",
+    "@cap-js/hana": "^2.6.0",
+    "@sap/xssec": "^4",
+    "@sap-cloud-sdk/connectivity": "^4",
+    "@sap-cloud-sdk/http-client": "^4",
+    "@sap-cloud-sdk/resilience": "^4",
+    "express": "^4"
+  },
+  "devDependencies": {
+    "@cap-js/sqlite": "^2",
+    "@sap/cds-dk": "^9",
+    "@sap/ux-ui5-tooling": "^1.20.2"
+  },
+  "scripts": {
+    "start": "cds-serve",
+    "build": "cds build",
+    "watch": "cds watch",
+    "build:ui5": "ui5 build --all"
+  },
+  "cds": {
+    "requires": {
+      "db": {
+        "kind": "hana",
+        "auth": {
+          "kind": "mocked",
+          "users": {
+            "viewer": {
+              "roles": [
+                "Viewer"
+              ]
+            }
+          }
+        }
+      },
+      "metadata": {
+        "kind": "odata-v4",
+        "model": "srv/external/webstore",
+        "credentials": {
+          "destination": "WEBSTORE_APP_A",
+          "path": "/odata/v4/config"
+        }
+      }
+    },
+    "[development]": {
+      "requires": {
+        "db": {
+          "kind": "sqlite",
+          "credentials": {
+            "database": ":memory:"
+          }
+        }
+      }
+    }
+  }
+}

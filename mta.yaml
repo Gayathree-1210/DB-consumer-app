@@ -1,0 +1,83 @@
+_schema-version: "3.3.0"
+ID: WebStoreConsumerApp
+version: 1.0.0
+description: "Consumes App A OData service"
+
+modules:
+  - name: WebStoreConsumerApp-srv
+    type: nodejs
+    path: .
+    build-parameters:
+      builder: custom
+      commands:
+        - npm ci
+        - npx cds build --production
+        - npm prune --production
+      build-result: gen/srv
+    parameters:
+      buildpack: nodejs_buildpack
+      instances: 1
+    requires:
+      - name: WebStoreConsumerApp-xsuaa
+      - name: WebStoreConsumerApp-destination
+      - name: WebStoreConsumerApp-connectivity  
+      - name: WebStoreConsumerApp-hdi
+    provides:
+      - name: consumer-api
+        properties:
+          srv-url: ${default-url}
+
+  - name: WebStoreConsumerApp-db
+    type: hdb
+    path: gen/db
+    requires:
+      - name: WebStoreConsumerApp-hdi
+    parameters:
+      buildpack: nodejs_buildpack
+
+  - name: WebStoreConsumerApp-approuter
+    type: approuter.nodejs
+    path: approuter
+    requires:
+      - name: WebStoreConsumerApp-xsuaa
+      - name: WebStoreConsumerApp-destination
+      - name: WebStoreConsumerApp-connectivity   
+      - name: consumer-api
+        group: destinations
+        properties:
+          name: consumer-api
+          url: ~{srv-url}
+          forwardAuthToken: true
+    parameters:
+      memory: 128M
+      disk-quota: 256M
+      buildpack: nodejs_buildpack
+
+resources:
+  - name: WebStoreConsumerApp-xsuaa
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./xs-security.json
+
+  - name: WebStoreConsumerApp-destination
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
+
+  - name: WebStoreConsumerApp-connectivity       
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: connectivity
+      service-plan: lite
+
+  - name: WebStoreConsumerApp-hdi
+    type: com.sap.xs.hdi-container
+    parameters:
+      service: hana
+      service-plan: hdi-shared
+
+parameters:
+  enable-parallel-deployments: true
